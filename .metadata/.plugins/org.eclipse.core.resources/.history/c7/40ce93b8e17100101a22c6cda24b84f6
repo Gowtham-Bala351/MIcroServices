@@ -1,0 +1,5 @@
+package com.ex.springWebClient.Model;
+
+public class Product {
+
+}

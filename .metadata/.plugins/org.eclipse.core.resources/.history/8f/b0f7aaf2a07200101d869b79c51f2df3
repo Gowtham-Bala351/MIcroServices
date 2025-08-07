@@ -1,0 +1,59 @@
+package com.example.CircuitBreaker.controler;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.CircuitBreaker.Model.User;
+import com.example.CircuitBreaker.reposit.CircuitRepo;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.swagger.v3.oas.annotations.Operation;
+
+@RestController
+public class CircuitbreakController {
+	@Autowired
+	private RestTemplate restemp;
+	
+	@Bean
+	private RestTemplate resttemplate()
+	{
+		return new RestTemplate();
+	}
+	
+	
+	@Autowired
+	private CircuitRepo crepo;
+	
+	@PostMapping("/postuser")
+	public User postUser(@RequestBody User user) {
+		return crepo.save(user);
+	}
+	
+	@GetMapping("/getusers")
+	public List<User> getUser()
+	{
+		return crepo.findAll();
+	}
+	
+	//-------
+	@CircuitBreaker(name ="getdata",fallbackMethod ="fallGetdata")
+	@Operation(description = "fallback check")
+	@GetMapping("/get")
+	public String getdata() 
+	{
+		//throw new Exception();
+		//return "i am circuitbreaker micro";
+		return restemp.getForObject("http://localhost:9099/getmicro1", String.class);
+	}
+	public String fallGetdata(Exception e)
+	{
+		return restemp.getForObject("http://localhost:9100/getmicro2", String.class);
+	}
+}

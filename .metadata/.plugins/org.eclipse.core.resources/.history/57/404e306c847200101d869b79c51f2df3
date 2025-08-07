@@ -1,0 +1,36 @@
+package com.example.CircuitBreaker.controler;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.CircuitBreaker.Model.User;
+import com.example.CircuitBreaker.reposit.CircuitRepo;
+
+@RestController
+public class CircuitbreakController {
+	@Autowired
+	private CircuitRepo crepo;
+	
+	@PostMapping("/postuser")
+	public User postUser(@RequestBody User user) {
+		return crepo.save(user);
+	}
+	
+	@GetMapping("/getuser")
+	public List<User> getUser()
+	{
+		return crepo.findAll();
+	}
+	
+	//-------
+	@GetMapping("/get")
+	public String getdata()
+	{
+		return "i am circuitbreaker micro";
+	}
+}

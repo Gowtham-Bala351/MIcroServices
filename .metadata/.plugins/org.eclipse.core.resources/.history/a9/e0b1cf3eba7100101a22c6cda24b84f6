@@ -1,0 +1,5 @@
+package com.example.Product_Fc.repository;
+
+public interface ProductrReposit {
+
+}

@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: http://localhost:8082
+          predicates:
+             - Path=/**
+        - id: Ecom_Booking_Service
+          uri: lb://Ecom_Booking_Service
+          predicates:
+        - Path=/restaurant/**
+server: 
+ port: 8765
+ eureka:
+   instance:
+     prefer-ip-address: true
+   client:
+     fetch-registry: true
+     register-with-eureka: true
+     service-url:
+       defaultZone: http://localhost:8761/eurekaserver.port=8765

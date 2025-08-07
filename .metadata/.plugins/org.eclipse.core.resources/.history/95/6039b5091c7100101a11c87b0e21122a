@@ -1,0 +1,18 @@
+package com.ex.springWebClient.control;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
+
+@RestController
+public class WebClientController {
+	@Autowired
+	private WebClient webclient;
+	
+	public WebClientController()
+	{
+		this.webclient=WebClient.create("http://localhost:9095");
+	}
+	
+}

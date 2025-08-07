@@ -1,0 +1,5 @@
+package com.example.CircuitBreaker.Model;
+
+public class User {
+
+}

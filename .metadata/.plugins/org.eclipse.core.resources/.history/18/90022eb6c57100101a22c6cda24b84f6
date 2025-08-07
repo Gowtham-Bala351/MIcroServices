@@ -1,0 +1,47 @@
+package com.example.Product_Fc.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.Product_Fc.Entity.Product;
+import com.example.Product_Fc.repository.ProductrReposit;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
+@RestController
+public class Product_Controller 
+{
+	@Autowired
+	private ProductrReposit prodrepo;
+	
+	@GetMapping("/getallProducts") 
+	public String getProduct()
+	{
+		return "IQ_mobile \nSony_Watch \nSamsung_Tv \nLgFridge"; 
+	}
+	@GetMapping("/getName")
+	public String getNAme()
+	{
+		return "i am product microservice";
+	}
+	//-------------
+	@Operation(description = "save product object")
+	@PostMapping("/createproduct")
+	public Product createproduct(@RequestBody Product pr)
+	{
+		System.out.println(pr);
+		return prodrepo.save(pr);
+	}
+	
+	@Operation(description = "get list of products")
+	@GetMapping("/getlistproducts")
+	public List<Product> getlistproducts()
+	{
+		return prodrepo.findAll();
+	}
+}

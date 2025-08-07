@@ -1,0 +1,44 @@
+package com.example.CircuitBreaker.controler;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.CircuitBreaker.Model.User;
+import com.example.CircuitBreaker.reposit.CircuitRepo;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
+@RestController
+public class CircuitbreakController {
+	@Autowired
+	private CircuitRepo crepo;
+	
+	@PostMapping("/postuser")
+	public User postUser(@RequestBody User user) {
+		return crepo.save(user);
+	}
+	
+	@GetMapping("/getusers")
+	public List<User> getUser()
+	{
+		return crepo.findAll();
+	}
+	
+	//-------
+	@CircuitBreaker(name ="getdata",fallbackMethod ="fallGetdata")
+	@GetMapping("/get")
+	public String getdata() throws Exception
+	{
+		throw new Exception();
+		//return "i am circuitbreaker micro";
+	}
+	public String fallGetdata()
+	{
+		return "i am Fallback_Micro";
+	}
+}

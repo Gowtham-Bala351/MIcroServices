@@ -1,0 +1,14 @@
+package com.example.Product_Fc.Controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Product_Controller 
+{
+	@GetMapping("/getall") 
+	public String getProduct()
+	{
+		return "IQ_mobile \nSony_Watch \nSamsung_Tv"; 
+	}
+}

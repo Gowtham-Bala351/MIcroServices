@@ -1,0 +1,25 @@
+package com.example.Feign_Client.interfaces;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.example.Product_Fc.Entity.Product;
+
+@FeignClient(name="ProductApi",url = "http://localhost:9095")
+public interface Productinf 
+{	
+	@GetMapping("/getallProducts")
+	public String getProduct();
+	@GetMapping("/getName")
+	public String getNAme();
+	
+	//---usingclass objs------
+	@PostMapping("/createproduct")
+	public Product createproduct(@RequestBody Product pr);
+//	{
+//		
+//  	return prodrepo.save(pr);
+//	}
+}

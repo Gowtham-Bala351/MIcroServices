@@ -1,0 +1,5 @@
+package com.example.Product_Fc.Entity;
+
+public class Product {
+
+}

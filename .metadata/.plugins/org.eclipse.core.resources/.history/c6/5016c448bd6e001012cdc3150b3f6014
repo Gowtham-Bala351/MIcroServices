@@ -1,0 +1,9 @@
+package com.example.Feign_Client.interfaces;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name="ProductApi",url = "htt")
+public interface Productinf 
+{
+
+}

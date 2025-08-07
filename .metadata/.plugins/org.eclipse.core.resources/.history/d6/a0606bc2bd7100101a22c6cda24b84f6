@@ -1,0 +1,16 @@
+spring.application.name=Product_Fcr
+server.port=9095
+
+
+# Hibernate settings
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+ 
+ 
+spring.datasource.driverClassName = oracle.jdbc.OracleDriver
+spring.datasource.url = jdbc:oracle:thin:@10.25.0.46:1541:FCUBTRAIN01
+spring.datasource.username = CUSTOMDEV
+spring.datasource.password = CUSTOMDEV123
+ 
+hibernate.dialect= org.hibernate.dialect.Oracle11gDialect

@@ -1,0 +1,28 @@
+package com.example.SpringRestTemplate.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+public class RestTempController 
+{
+	@Lazy
+	@Autowired
+	private RestTemplate restemp;
+	
+	@GetMapping("/getProd")
+	public String getallProd()
+	{
+		return restemp.getForObject("http://localhost:9095", String.class);
+	}
+	
+	@Bean
+	private RestTemplate restTemplate()
+	{
+		return new RestTemplate();
+	}
+}

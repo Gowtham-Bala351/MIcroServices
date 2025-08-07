@@ -1,0 +1,17 @@
+package com.circuit.Order_ld_chk.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Ordercontrolelr {
+	@Autowired
+	private Environment env;
+	@GetMapping("/get")
+	public String getData()
+	{
+		return "I am order Microservice " +env.getProperty("server.port");
+	}
+}

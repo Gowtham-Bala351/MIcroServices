@@ -1,0 +1,5 @@
+package com.example.Feign_Client.Controller;
+
+public class FeignController {
+
+}

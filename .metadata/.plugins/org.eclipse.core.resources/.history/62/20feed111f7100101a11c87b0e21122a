@@ -1,0 +1,37 @@
+package com.ex.springWebClient.control;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+public class WebClientController {
+	private WebClient webclient;
+	
+	public WebClientController()
+	{
+		this.webclient=WebClient.create("http://localhost:9095");
+	}
+	
+	//synchronous way using block()
+	@GetMapping("/allproducts")
+	public String synallproducts()
+	{
+		return webclient.get().uri("getallProducts").retrieve().bodyToMono(String.class).block();
+	}
+	//Asynchronous way using  Mono for single data return)
+	@GetMapping("/allproductsNon")
+	public Mono<String> asynallproducts()
+	{
+		return webclient.get().uri("getallProducts").retrieve().bodyToMono(String.class);
+	}
+	//Asynchronous way using  Flux for single data return)
+	@GetMapping("/Name")
+	public Flux<String> asynallproductsFlux()
+	{
+		return webclient.get().uri("getName").retrieve().bodyToFlux(String.class);
+	}
+}

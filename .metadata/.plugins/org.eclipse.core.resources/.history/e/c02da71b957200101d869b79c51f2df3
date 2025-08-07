@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: MicroExample2
+server:
+  port: 9100

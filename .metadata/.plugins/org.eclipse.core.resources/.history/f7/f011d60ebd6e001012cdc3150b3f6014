@@ -1,0 +1,5 @@
+package com.example.Feign_Client.interfaces;
+
+public interface Productinf {
+
+}

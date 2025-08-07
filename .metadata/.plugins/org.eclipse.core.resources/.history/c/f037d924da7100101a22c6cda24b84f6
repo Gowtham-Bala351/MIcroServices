@@ -1,0 +1,5 @@
+package com.example.SpringRestTemplate.Model;
+
+public class Product {
+
+}

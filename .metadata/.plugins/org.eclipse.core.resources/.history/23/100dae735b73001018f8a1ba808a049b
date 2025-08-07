@@ -1,0 +1,9 @@
+spring.application.name=Order
+
+#server.port=6767
+server.port=8899
+
+#Admin-server
+spring.boot.admin.client.url=http://localhost:7890
+management.endpoints.web.exposure.include=*
+management.endpoint.health.show-details=always
